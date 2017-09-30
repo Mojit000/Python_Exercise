@@ -23,4 +23,10 @@ def text_reply(msg):
         itchat.send(u'@%s\u2005I received: %s'%(msg['ActualNickName'], msg['Content']), msg['FromUserName'])
 
 itchat.auto_login()
+
+friends = itchat.get_friends(update=True)
+
+my_nickName = friends[0].ActualNickName
+print(my_nickName)
+
 itchat.run()
