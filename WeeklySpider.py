@@ -71,8 +71,6 @@ def parse_other_html(html, db):
         # 数据处理
         read_and_comments = ''.join(read_and_comments).strip().split()
         like_and_pay = ''.join(like_and_pay).strip().split()
-        # read_count = meta.xpath('a/text()')
-        # print(author, author_url, title, article_url, abstract, read_and_comments, like_and_pay)
         data ={
             'author': author,
             'author_url': author_url,
