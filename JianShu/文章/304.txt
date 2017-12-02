@@ -1,0 +1,138 @@
+我写了一份简历，然后.........把它开源了？
+你是否有过写简历时觉得排版不好看、简历内容没有主次感，自己又不会设计，只能把文字堆放一块打包成一份PDF发给HR？
+昨天第一次写简历，遇到了这个问题，写简历的时候，要不断修改、更新、保存打包。
+这么麻烦的事情还是让机器自己干吧，让程序自动更新简历内容，我只负责写，然后告诉程序这个段落放哪，用什么图标修饰就好了。
+所以写了这个主题：Zresume，主要面向程序员，因为要用自己服务器。
+1. 特色
+
+直接使用 Markdown 编写，会自动解析成效果图那样的界面，简书用户很多都会用 Markdown 吧。
+模块、图标、排版全部可以在 Markdown 中定义，不需要修改代码。
+提供了一键部署的 Docker 容器，可以一键部署你的简历。
+喜欢的话请给我一个 Star （没错我是来骗 Star 的，啊哈）。
+
+
+效果图
+
+2. 部署自己的简历
+部署什么的从来都是一句话：
+curl -sSL https://git.io/Resume | bash
+
+
+脚本会下载启动一个 30MB 的镜像，然后挂载 $HOME/resume 目录为数据卷，占用端口 8080，resume 目录里面就是简历的 Markdown 源文件了，照葫芦画瓢修改即可。
+
+3. 怎么用Markdown写简历
+
+example里面是我的简历源文件
+
+如上图所示，是我的简历源文件（执行上面脚本之后可以在$HOME/resume中看到），你可以根据我的模板修改。注意在config中的配置是启动时读取的，所以如果你修改了config中的内容，需要重启容器：docker restart resume。
+如果是修改简历内容（pages文件夹里面的markdown文件），不需要重启，例如：
+---
+title: 我的简历 | 左蓝
+name: 左蓝
+description: 我的专业方向
+
+pdf_url: "我的简历PDF下载地址"
+blog_url: "我的博客地址"
+
+address:
+    - line: "出生于1995年2月"
+    - line: "性别：男"
+contact: 
+    - line: "邮箱：i@zuolan.me"
+    - line: "手机：1881412****"
+social:
+    - line: "微信：@zuo-lan"
+    - line: "QQ：792236072"
+
+sitemap:
+    changefreq: weekly
+    priority: 1.03
+
+content:
+    items: @self.children
+    order:
+        by: date
+        dir: desc
+    limit: 5
+    pagination: true
+
+feed:
+    description: 左蓝的个人简历。
+    limit: 10
+---
+
+改完立刻可以看到效果，然后你可以在 Markdown 中指定每一个图标与布局：
+---
+title: 这里是每个部分的小标题
+icon: 这里是标题前面的小图标
+date: 16:49 08/29/2017
+taxonomy:
+    category: left # 这里是这个部分所在的位置，可以填左边或者右边。
+---
+
+噼里啪啦，噼里啪啦，噼里啪啦，噼里啪啦。
+
+
+好了以上是写给一般用户的。以下内容是写给程序员们的。
+
+1. 手动部署
+首先这是一个 Grav CMS 的程序员简历主题，所以你可能需要一点前端知识来修改主题，以及一点 Docker 知识用于维护简历容器。
+1.1 手动启动
+首先确保你安装了 Docker，然后执行下面命令：
+# 使用下面脚本快速安装 Docker：
+# curl -sSL https://get.docker.com/ | sh
+
+$ RESUME_PATH="$HOME/resume" # 设置简历存储在本地的目录
+$ RESUME_PORT="8080"         # 设置访问简历的端口
+$ mkdir -p $RESUME_PATH
+
+# 获取示例文件
+$ docker run -d --name resume_tmp zuolan/resume
+$ docker cp resume_tmp:/usr/html/user/config $RESUME_PATH/config
+$ docker cp resume_tmp:/usr/html/user/pages $RESUME_PATH/pages
+$ docker rm -f resume_tmp resume
+
+# 启动简历容器
+$ docker run -d --name resume \
+    -p 8080:80 \
+    --restart=always \
+    -v ~/resume/pages:/usr/html/user/pages \
+    -v ~/resume/config/:/usr/html/user/config \
+    zuolan/resume
+
+1.2 快速获取 Github 日历
+curl https://github.com/izuolan | awk '/<svg.+class="js-calendar-graph-svg"/,/svg>/' | sed -e 's|<svg|<svg xmlns="http://www.w3.org/2000/svg"|' | sed '/text/'d > github.svg
+
+2. 修改主题
+如果你需要修改主题具体样式，可以把主题文件夹也挂载到数据卷中：
+# 使用下面脚本快速安装 Docker：
+# curl -sSL https://get.docker.com/ | sh
+
+$ RESUME_PATH="$HOME/resume" # 设置简历存储在本地的目录
+$ RESUME_PORT="8080"         # 设置访问简历的端口
+$ mkdir -p $RESUME_PATH
+
+# 获取示例文件
+$ docker run -d --name resume_tmp zuolan/resume
+$ docker cp resume_tmp:/usr/html/user/config $RESUME_PATH/config
+$ docker cp resume_tmp:/usr/html/user/pages $RESUME_PATH/pages
+$ docker cp resume_tmp:/usr/html/user/themes $RESUME_PATH/themes
+$ docker rm -f resume_tmp resume
+
+# 启动简历容器
+$ docker run -d --name resume \
+  -p 8080:80 \
+  --restart=always \
+  -v ~/resume/themes:/usr/html/user/themes \
+  -v ~/resume/pages:/usr/html/user/pages \
+  -v ~/resume/config/:/usr/html/user/config \
+  zuolan/resume
+
+4. 协议
+主题最初从 Resume 主题 Fork 过来，原主题很久没更新了，我也改了很多东西，依旧是MIT协议开源。
+
+我找实习呀～～
+扩展链接：
+
+v2ex
+掘金秋招征文活动

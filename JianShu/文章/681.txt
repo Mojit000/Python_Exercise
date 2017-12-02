@@ -1,0 +1,249 @@
+少撸两局教你搭个博客玩
+是不是羡慕别人都有自己的博客啊，是啊我也特别羡慕 。。。可以有个属于自己的地址，在上面敲敲写写。
+然后自己开始捣鼓 折腾  最后成功了还是很开心。。。
+接下来的博客模式是用 HEXO+Github
+下面介绍下什么是 Hexo :
+它是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页
+官方文档 ： https://hexo.io/
+目录结构：
+
+目录结构介绍
+
+想要了解Hexo 原理的可以看下这个
+hexo原理浅析
+下面我们开始搞事情：
+1.搭建环境准备（包括node.js和git环境，gitHub账户的配置）
+2.安装Hexo
+3.配置Hexo
+4.怎样将Hexo与github page 联系起来
+5.怎样发布文章
+6.主题 推荐
+搭建环境准备
+node 安装
+下载地址：
+   [Windows Installer 64-bit](https://nodejs.org/dist/v4.2.3/node-v4.2.3-x64.msi)
+ [Windows Installer 32-bit](https://nodejs.org/dist/v4.2.3/node-v4.2.3-x86.msi)
+
+git   安装
+gitHub 账户配置
+node 安装很简单 直接下载安装就行了,检验是否安装成功：打开cmd
+
+查看node版本
+
+配置Git环境：
+
+这个是我的百度云分享的链接GitHub
+安装的时候可以选择Git Bash 或 CMD 操作  选择CMD的话 每次 调git的话 就不用 git bash here 了 也很方便。
+查看git版本：git  --version
+
+git
+
+能够查看到版本号 说明已经安装成功。
+github账户的注册和配置：
+没有的话就去注册一个： GitHub
+不会玩的看下这个教程：廖雪峰Git教程
+有账号的话 新建一个仓库
+
+新建仓库.png
+
+填写仓库名，勾选 Initialize this repository with a README
+然后点击创建！
+
+
+仓库的创建
+
+创建完成后，然后开启gh-page功能。
+
+
+点击仓库中的setting
+
+下拉选择 分支 master branch
+
+
+下拉选择
+
+点击保存的时候 会生成一个 GitHub pages 网址
+
+
+GitHub pages
+
+
+网站内容
+
+这个就是属于我们自己的网站了  是不是很开心...
+要让他好看点 有丰富的内容  下面就是Hexo出场...
+
+
+开心
+
+安装Hexo
+新建文件夹 然后进入这个文件夹 右键 git bash here  如果你装的是cmd 直接用系统的CMD 玩就行了。
+
+image.png
+
+安装Hexo依赖
+npm install hexo-cli -g
+
+然后install组件
+npm install hexo --save
+
+查看版本:
+hexo -v
+
+
+安装成功
+
+配置Hexo
+用hexo 命令 新建文件夹
+hexo  init jslin
+
+
+init
+
+填坑： 当你在进行hexo 操作时 都是报不是 命令时，确认下是不是用hexo init 创建的文件  用这个命令 创建文件 可以配置 我们的 package.json 文件  当我们npm  时可以安装对应包文件。
+
+error
+
+进入你新建的文件夹
+
+新建的文件
+
+然后 安装 npm包
+
+npm install
+
+生成
+hexo g
+
+启动服务预览
+hexo s
+
+也可以一步生成
+hexo s -g
+
+hexo常用命令
+当完成上面操作时会提示：
+
+success
+
+到浏览器中打开这个链接:  http://localhost:4000/
+Amazing!!!  开心吧  我们的模板已经生成了。
+
+美美的紫霞仙子献上
+
+熟悉的Hello World ！！！
+
+
+Hello  World
+
+让我们的Hexo 和 github page 关联起来
+大概分为以下几步
+
+配置git个人信息
+配置Deployment
+
+如果是第一次的话 ：
+git config --global user.name "XXX"
+git config --global user.email "XXX@XXXcom"
+
+检查是否有SSh  ，如果没有的话 在gitHub上新建一个
+cd ~/.ssh
+
+然后输入ls　查看
+ls
+
+我这里设置了 会出现这两个文件
+
+SSH
+
+生成新的秘钥
+
+ssh-keygen -t rsa -C "XXX@XXXcom"
+
+一直按回车
+将SSH Key添加到ssh-agent，执行命令
+eval $(ssh-agent -s)
+
+返回agent的Pid：
+
+pid
+
+执行命令：
+
+ssh-add ~/.ssh/id_rsa
+
+添加成功 返回路径：
+
+id_rsa
+
+然后在自己的git上 添加SSH 秘钥
+
+
+git
+
+把秘钥文件 id_rsa  copy到这里
+
+git上添加SSH Key
+
+
+add_sshKey
+
+验证ssh连接:
+ssh -T git@github.com
+
+
+hello
+
+ok  ssh  到这里我们配置成功了，然后配置下 config.yml文件的Deployment
+
+
+config.yml
+
+
+Deployment
+
+deploy:
+  type: git
+  repo: git@github.com:JslinSir/Jslin.git
+  branch: master
+
+填坑：
+这里设置好了Deployment  一定要
+npm install hexo-deployer-git --save
+
+不然的话在生成和部署的时候会报错 坑已经踩过了
+
+
+error
+
+
+别再踩喽
+
+接下来就是 配置我们的Hexo 主题
+要不然这样也太丑了吧。。。
+
+Hexo
+
+我用的是yilia主题 感觉这个简洁  挺好用的  看下效果
+
+美美的紫霞
+
+关于主题的设置
+这里配置你要是使用的主题,如果你也想使用yilia主题的话 clone这个
+$ git clone https://github.com/litten/hexo-theme-yilia.git themes/yilia
+
+
+image.png
+
+设置完主题 部署到git上:
+
+hexo d -g
+
+开启服务
+hexo s
+
+断断续续折腾了两天，这个博客还存在着问题，点击详情头像不显示问题，菜单还没有布局,还有些404页面还未设置  走到这已经很开心了，加油继续完善！
+
+
+
+把生命浪费在折腾上，和美丽的代码上...  博客地址ClickMe

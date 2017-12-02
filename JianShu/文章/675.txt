@@ -1,0 +1,16 @@
+10招教你更好的使用Google，搜索更全面
+1.使用“|”或者“or”搜索不确定的关键词。2.使用“URL 关键字”进行站内搜索，比如搜索功能非常不友好的某乎，你就可以通过Google的站内搜索功能搜索你想要的关键词，例如输入“zhihu.com 宋朝”（不含引号），就会看见如下搜索内容：
+
+3.使用引号搜索短语。当我们在短语的外面加上引号时，Google会考虑短语的单词顺序和接近度等显示搜索结果。例如搜索：Nobel Prize Winners 1987，会得到如下结果：
+
+如果搜索："Nobel Prize Winners 1987"，仅会显示如下结果，很明显，搜索的更加精确了。
+
+4.采用通配符星号（*）代替一个单词迷糊查询。 这个对于我们查询句式的表达形式和歌词非常有用。例如我们搜索“* is thicker than water”会得到下列信息：
+
+5.使用AROUND(n)大范围模糊搜寻，如果你只记得一段文字中的几个单词，并且这些单词相距很远，这时候你就可以尝试使用这个命令，它非常适用于查找论文文献和搜索歌词，例如霉霉的新歌，如果听过后只记得“got a list of names balabala underlined”，那么我们就可以在搜索引擎中输入“got a list of names AROUND(50) underlined”，这样Google就会自动的匹配到相关的信息，例图如下：
+
+6.通过减号“－”排除不需要的关键词。当我们搜索的时候，很多时候搜索出来的内容中有一些是我们明确不想要的内容，这些内容我们可以通过使用删除关键词的方法排除掉这些信息。大家可以自行在Google的搜索栏中搜索“interesting books”和“interesting books -buy”，比较搜索结果的区别。7.使用“related:”来搜索相关网页。冒号后接网站地址。达到通过现有的网站找到相似网站的目的。例如你在搜索栏中输入“relate:jd.com"，就会出现如下结果：
+
+8.通过“allintitle”和“allinurl”对标题和URL进行搜索。9.通过filetype:搜索特定文件格式。比如搜索"xxx filetype:pdf "返回的就是包含xxx这个关键词的所有pdf 文件。例如在搜索栏中搜索：“乌克兰拖拉机简史 filetype:pdf”
+
+10.最后一个就不展示什么用法了，自己在搜索栏中输入“do a barrel roll”（不带引号），自己去尝试一下吧，Have fun！参考网站：1.http://www.googleguide.com/advanced_operators_reference.html#allintitle2.https://www.google.com/intl/br/insidesearch/tipstricks/all.html
