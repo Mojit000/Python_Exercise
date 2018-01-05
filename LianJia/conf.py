@@ -1,0 +1,1 @@
+LJ_URL = 'https://sz.lianjia.com/ershoufang/'
